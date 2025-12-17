@@ -17,3 +17,9 @@ body {
     text-align: center;
     margin-bottom: 12px;
 }
+
+.item-list {
+    overflow-y: auto;
+    max-height: calc(100vh - 160px);
+    padding-right: 4px;
+}
