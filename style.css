@@ -23,3 +23,58 @@ body {
     max-height: calc(100vh - 160px);
     padding-right: 4px;
 }
+
+.item-card {
+    background: #7fb236;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    position: relative;
+}
+ 
+.edit-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #a7db5a;
+    color: #2d3a1a;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.item-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.qty {
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.expire {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.add-area {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.add-btn {
+    background: #a7db5a;
+    color: #2d3a1a;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 16px;
+    text-decoration: none;
+}
