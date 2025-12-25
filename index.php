@@ -4,8 +4,9 @@ require_once 'db.php';
 $stmt = $pdo->query("SELECT * FROM items ORDER BY expire_date ASC");
 $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <title>賞味期限アプリ</title>
@@ -18,10 +19,25 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <h2 class="title">登録商品</h2>
 
-    <!-- 一覧（スクロール部分） -->
     <div class="item-list">
         <?php foreach ($items as $item): ?>
-            <div class="item-card">
+
+            <?php
+                $today = new DateTime();
+
+                $expire = new DateTime($item['expire_date']);
+
+                $diff = (int)$today->diff($expire)->format('%r%a');
+
+                $class = '';
+                if ($diff < 0) {
+                    $class = 'expired';
+                } elseif ($diff <= 3) {
+                    $class = 'soon';
+                }
+            ?>
+
+            <div class="item-card <?php echo $class; ?>">
                 <a class="edit-btn" href="edit.php?id=<?php echo $item['id']; ?>">編集</a>
 
                 <div class="item-name">
@@ -30,18 +46,16 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
 
                 <div class="expire">
-                    賞味期限　<?php echo htmlspecialchars($item['expire_date']); ?>
+                    賞味期限<?php echo htmlspecialchars($item['expire_date']); ?>
                 </div>
             </div>
+
         <?php endforeach; ?>
     </div>
 
-    <!-- 追加ボタン -->
     <div class="add-area">
         <a href="add.php" class="add-btn">商品の追加</a>
     </div>
-
 </div>
-
 </body>
 </html>
