@@ -1,7 +1,22 @@
 <?php
 require_once 'db.php';
 
-$stmt = $pdo->query("SELECT * FROM items ORDER BY expire_date ASC");
+/* 並び替え*/
+$sort = $_GET['sort'] ?? 'expire';
+
+switch ($sort) {
+    case 'created':
+        $order = 'id ASC';
+        break;
+    case 'name':
+        $order = 'name COLLATE utf8mb4_unicode_ci ASC';
+    break;
+    default:
+        $order = 'expire_date ASC';
+}
+
+$sql = "SELECT * FROM items ORDER BY $order";
+$stmt = $pdo->query($sql);
 $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -18,6 +33,12 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="app">
 
     <h2 class="title">登録商品</h2>
+
+    <div class="sort-area">
+    <a href="index.php?sort=expire" class="add-btn sort-btn">期限日順</a>
+    <a href="index.php?sort=created" class="add-btn sort-btn">登録順</a>
+    <a href="index.php?sort=name" class="add-btn sort-btn">名前順</a>
+    </div>
 
     <div class="item-list">
         <?php foreach ($items as $item): ?>
