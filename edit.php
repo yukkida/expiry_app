@@ -14,30 +14,44 @@ $item = $stmt->fetch();
 <head>
 <meta charset="UTF-8">
 <title>商品編集</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>商品を編集</h2>
+<div class="app">
 
-<form action="update.php" method="POST">
-    <input type="hidden" name="id" value="<?= $item['id'] ?>">
+    <h1 class="title">商品を編集</h1>
 
-    名前：<input type="text" name="name" value="<?= $item['name'] ?>"><br><br>
+    <div class="center-box">
+        <form action="update.php" method="POST" class="add-form">
+            <input type="hidden" name="id" value="<?= $item['id'] ?>">
 
-    個数：<input type="number" name="quantity" value="<?= $item['quantity'] ?>"><br><br>
+            <label>
+                商品名
+                <input type="text" name="name" value="<?= htmlspecialchars($item['name']) ?>" required>
+            </label>
 
-    賞味期限：
-    <input type="date" name="expire_date" value="<?= $item['expire_date'] ?>"><br><br>
+            <label>
+                個数
+                <input type="number" name="quantity" value="<?= $item['quantity'] ?>" min="1" required>
+            </label>
 
-    <button type="submit">更新</button>
-</form>
+            <label>
+                賞味期限
+                <input type="date" name="expire_date" value="<?= $item['expire_date'] ?>" required>
+            </label>
 
-<br>
-<!--編集画面にも削除ボタン-->
-<a href="delete.php?id=<?= $item['id'] ?>"
-    onclick="return confirm('削除しますか？');">
-削除
-</a>
+            <button type="submit" class="add-btn full-btn">更新</button>
+        </form>
+
+        <a href="delete.php?id=<?= $item['id'] ?>"
+            class="delete-btn"
+            onclick="return confirm('削除しますか？');">
+            削除
+        </a>
+    </div>
+
+</div>
 
 </body>
 </html>
