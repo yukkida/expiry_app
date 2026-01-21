@@ -10,13 +10,12 @@ body {
     max-width: 420px;
     margin: 0 auto;
     background: #9ad24b;
-    min-height: 100vh;
+    height: 100vh;
     padding: 16px;
     box-sizing: border-box;
-
     display: flex;
     flex-direction: column;
-    /*justify-content: center;*/
+    position: relative;
 }
 
 .title {
@@ -27,9 +26,10 @@ body {
 /*index.php用*/
 
 .item-list {
+    flex: 1;
     overflow-y: auto;
-    max-height: calc(100vh - 160px);
     padding-right: 4px;
+    margin-bottom: 84px;
 }
 
 .item-card {
@@ -75,7 +75,6 @@ body {
     right: 0;
     display: flex;
     justify-content: center;
-    gap: 12px;
 }
 
 /*共通のボタン*/
@@ -202,4 +201,32 @@ body {
 .search-btn {
     padding: 10px 16px;
     font-size: 14px;
+}
+
+.memo-btn {
+    position: absolute;
+    right: 40px;
+    bottom: 22px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #a7db5a;
+    color: #000;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.add-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background: #7fb236;
+    resize: none;
 }

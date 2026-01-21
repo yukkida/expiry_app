@@ -99,6 +99,7 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="add-area">
         <a href="add.php" class="add-btn">商品の追加</a>
     </div>
+    <a href="memo.php" class="memo-btn">📝</a>
 </div>
 </body>
 </html>
