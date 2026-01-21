@@ -1,8 +1,10 @@
 <?php
 require_once 'db.php';
 
+
 /* 並び替え*/
 $sort = $_GET['sort'] ?? 'expire';
+$keyword = $_GET['keyword'] ?? '';
 
 switch ($sort) {
     case 'created':
@@ -15,8 +17,18 @@ switch ($sort) {
         $order = 'expire_date ASC';
 }
 
-$sql = "SELECT * FROM items ORDER BY $order";
-$stmt = $pdo->query($sql);
+$sql = "SELECT * FROM items WHERE 1";
+$params = [];
+
+if ($keyword !== '') {
+    $sql .= " AND name LIKE ?";
+    $params[] = '%' . $keyword . '%';
+}
+
+$sql .= " ORDER BY $order";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -33,6 +45,16 @@ $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="app">
 
     <h2 class="title">登録商品</h2>
+
+    <form method="get" action="index.php" class="search-area">
+        <input
+            type="text"
+            name="keyword"
+            placeholder="商品名で検索"
+            value="<?= htmlspecialchars($keyword) ?>"
+        >
+        <button type="submit" class="add-btn search-btn">検索</button>
+    </form>
 
     <div class="sort-area">
     <a href="index.php?sort=expire" class="add-btn sort-btn">期限日順</a>

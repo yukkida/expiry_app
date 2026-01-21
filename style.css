@@ -183,3 +183,23 @@ body {
     font-size: 14px;
     text-decoration: none;
 }
+
+.search-area {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.search-area input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #7fb236;
+    font-size: 14px;
+}
+
+.search-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+}
